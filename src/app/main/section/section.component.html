@@ -1,0 +1,13 @@
+<mat-card> 
+  <mat-card-title>
+    {{title}} <span *ngIf="counter">({{counter}})</span>
+  </mat-card-title>
+  <mat-card-content>
+    <div *ngFor="let section of keys(sections);" style="display:inline-block; margin:10px;">
+      <span routerLink="/games/{{console}}/{{section}}" routerLinkActive="active">{{sections[section]}}
+      <span *ngIf="sectionsCounter[section] && sectionsCounter[section] !== '0'">({{sectionsCounter[section]}})</span>
+      </span>
+    </div>
+    <app-adlist [ads]="ads"></app-adlist>
+  </mat-card-content>
+</mat-card>

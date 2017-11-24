@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>
+  Confirm
+</h1>
+<mat-dialog-content *ngIf="message">
+  {{ message }}
+  <form  [formGroup]="dialogForm">
+    <div *ngIf="askForPassword" style="margin-top:12px; margin-bottom:12px;">
+      <mat-form-field>
+        <input matInput placeholder="password" type="password" style="width:100%;" formControlName="password" required>
+        <mat-hint *ngIf="formErrors.password" align="end">{{ formErrors.password }}</mat-hint>
+      </mat-form-field>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button *ngIf="askForPassword" [disabled]="!dialogForm.valid" (click)="closeSubmit(true);" mat-raised-button style="margin-bottom:8px;">Yes</button>
+  <button *ngIf="!askForPassword" (click)="closeSubmit(true);" mat-raised-button style="margin-bottom:8px;">Yes</button>
+  <button (click)="closeSubmit(false);" mat-raised-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>

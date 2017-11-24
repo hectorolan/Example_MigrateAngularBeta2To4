@@ -1,0 +1,66 @@
+<form [formGroup]="accountForm"  *ngIf="active && user"  (ngSubmit)="onSubmit()">
+  <mat-card-subtitle style="color:#ff3333;"> 
+      {{ formCustomError }}
+  </mat-card-subtitle>
+    <mat-card-content>
+      <div>
+      <table style="border-collapse: collapse; width: 100%;">
+          <tr>
+              <td style="width:100%;">
+                <mat-form-field>
+                    <input matInput placeholder="Email" maxlength="50" type="email" style="width:100%;" formControlName="email" required>
+                    <mat-hint *ngIf="formErrors.email" align="end">{{ formErrors.email }}</mat-hint>
+                </mat-form-field>
+              </td>
+              <td style="min-width:100px;">
+                  <mat-checkbox formControlName="emailOnAd" style="font-size:12px;">Show on Ads</mat-checkbox>
+              </td>
+          </tr>
+      </table>
+      </div>
+      <div *ngIf="showPassword">
+        <mat-form-field>
+            <input matInput placeholder="Password" type="password" maxlength="10" style="width:100%;" formControlName="password" required>
+            <mat-hint *ngIf="formErrors.password" align="end">{{ formErrors.password }}</mat-hint>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+            <input matInput placeholder="Name" maxlength="50" style="width:100%;" formControlName="name" required>
+            <mat-hint *ngIf="formErrors.name" align="end">{{ formErrors.name }}</mat-hint>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+            <input matInput placeholder="City" maxlength="50" style="width:100%;" formControlName="city" required>
+            <mat-hint *ngIf="formErrors.city" align="end">{{ formErrors.city }}</mat-hint>
+        </mat-form-field>
+      </div>
+      <div>
+      <table style="border-collapse: collapse; width: 100%;">
+          <tr>
+              <td style="width:100%;">
+                <mat-form-field>
+                    <input matInput placeholder="Telephone" maxlength="15" type="tel" style="width:100%;" formControlName="telephone" required>
+                    <mat-hint *ngIf="formErrors.telephone" align="end">{{ formErrors.telephone }}</mat-hint>
+                </mat-form-field>
+              </td>
+              <td style="min-width:100px;">
+                  <mat-checkbox formControlName="telephoneOnAd" style="font-size:12px; float:right;">Show on Ads</mat-checkbox>
+              </td>
+          </tr>
+      </table>
+      </div>
+      <div>
+        <!--<matInput disabled value="Contact me by:" style="width:100%;"></matInput><br>-->
+        <mat-checkbox formControlName="methodCall">Call</mat-checkbox>
+        <mat-checkbox formControlName="methodTextMessage">Text Message</mat-checkbox>
+        <!--<mat-checkbox formControlName="methodEmail">Email</mat-checkbox>-->
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button type="submit" [disabled]="!accountForm.valid">Submit</button>
+      <button mat-button (click)="cancelChanges()">Cancel</button>
+    </mat-card-actions>
+  </form>
+  

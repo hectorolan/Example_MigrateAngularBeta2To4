@@ -1,0 +1,27 @@
+<!--<table>
+  <tr>
+    <td style="vertical-align:top;">
+      <mat-nav-list style="width:200px;">
+        <a *ngIf="!authService.isLoggedIn" mat-list-item routerLink="/login" routerLinkActive="active">Log in</a>
+        <a *ngFor="let console of keys(consoles);" mat-list-item routerLink="/games/{{console}}" 
+        routerLinkActive="active">{{consoles[console]}}</a>
+        <a *ngIf="authService.isLoggedIn" mat-list-item routerLink="/admin" routerLinkActive="active">{{ this.authService.user.name == '' ? 'Account' : this.authService.user.name }}</a>
+        <a *ngIf="authService.isLoggedIn" mat-list-item (click)="logout();">Log out</a>
+      </mat-nav-list>
+    </td>
+    <td style="vertical-align:top; width:100%;">
+      <router-outlet></router-outlet>
+    </td>
+  </tr>
+</table>-->
+<mat-sidenav-container style="padding-top:64px;">
+  <mat-sidenav mode="{{ navMode }}" opened="{{ initOpened }}" #navpanel id="navpanel" style="padding-top:64px;">
+    <mat-nav-list style="width:200px;">
+      <a *ngIf="!authService.isLoggedIn" mat-list-item routerLink="/login" routerLinkActive="active">Log in</a>
+      <a *ngIf="authService.isLoggedIn" mat-list-item routerLink="/admin" routerLinkActive="active" (click)="onMenuSelected();">{{ authService.user.name == '' ? 'Account' : 'Account' }}</a>
+      <a *ngFor="let console of keys(consoles);" mat-list-item routerLink="/games/{{console}}" routerLinkActive="active" (click)="onMenuSelected();">{{ consoles[console] }}</a>
+      <a *ngIf="authService.isLoggedIn" mat-list-item (click)="logout();onMenuSelected();">Log out</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <router-outlet></router-outlet>
+</mat-sidenav-container>

@@ -1,0 +1,117 @@
+<h1>Create new Ad</h1>
+<form [formGroup]="formCreateAd"  *ngIf="formActive && validUserFlag"  (ngSubmit)="onSubmit()">
+  <mat-tab-group [selectedIndex]="formTabSelectedIndex">
+    <mat-tab label="Console">
+    <mat-card>
+      <mat-card-subtitle>{{ formMessageCompletion }}</mat-card-subtitle>
+      <mat-card-title>Console</mat-card-title>
+      <mat-card-content>
+        <div>
+          <input type="hidden" formControlName="console"/>
+        </div>
+        <mat-nav-list>
+          <a mat-list-item *ngFor="let console of keys(consoles);" (click)="completeTab('console', console)">{{ consoles[console] }}</a>
+        </mat-nav-list>
+      </mat-card-content>
+    </mat-card>
+    </mat-tab>
+    <mat-tab label="Section">
+    <mat-card>
+      <mat-card-subtitle>{{ formMessageCompletion }}</mat-card-subtitle>
+      <mat-card-title>Section</mat-card-title>
+      <mat-card-content>
+        <div>
+          <input type="hidden"formControlName="section"/>
+        </div>
+        <mat-nav-list>
+          <a mat-list-item *ngFor="let section of keys(sections);" (click)="completeTab('section', section)">{{ sections[section] }}</a>
+        </mat-nav-list>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button type="button" (click)="resetChanges()"><mat-icon class="mat-24">clear</mat-icon>Clear</button>
+      </mat-card-actions>
+    </mat-card>
+    </mat-tab>
+    <mat-tab label="Name">
+    <mat-card>
+      <mat-card-subtitle>{{ formMessageCompletion }}</mat-card-subtitle>
+      <mat-card-title>Name</mat-card-title>
+      <mat-card-content>
+        <div style="display:block">
+          <mat-form-field>
+            <input matInput placeholder="Name" maxlength="50" style="width:100%;" formControlName="name" required>
+            <mat-hint *ngIf="formErrors.name" align="end">{{ formErrors.name }}</mat-hint>
+          </mat-form-field>
+        </div>
+        <div>
+        <input type="file" id="myFile" *ngIf="formCreateAd.controls['section'].value != 'games' && !gameSelected" (change)="onFileChanged($event)"/>
+        </div>
+        <br>
+        <img style="width:288px;" *ngIf="adImageSrc!=''" [src]="adImageSrc" >
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button type="button" (click)="resetChanges()"><mat-icon class="mat-24">clear</mat-icon>Clear</button>
+        <button mat-button type="button" (click)="completeTab('name', formCreateAd.controls['name'].value)"><mat-icon class="mat-24">check</mat-icon>Done</button>
+        <button mat-button type="button" *ngIf="gameSelected" (click)="onGameUnselected()"><mat-icon class="mat-24">clear</mat-icon>Clear Name</button>
+      </mat-card-actions>
+      <mat-card-actions>
+      </mat-card-actions>
+    </mat-card>
+    </mat-tab>
+    <mat-tab label="Price/Description">
+    <mat-card>
+      <mat-card-subtitle>{{ formMessageCompletion }}</mat-card-subtitle>
+      <mat-card-title>Price / Description</mat-card-title>
+      <mat-card-content>
+        <!--<matInput placeholder="Price" maxlength="10" type="number" style="max-width:275px;"align="end" formControlName="price" required>
+          <span mat-prefix>$&nbsp;</span>
+          <span mat-suffix>.00</span>
+          <mat-hint *ngIf="formErrors.price" align="end">{{ formErrors.price }}</mat-hint>
+        </matInput>-->
+        <div style="max-width:500px; display:block;">
+        <mat-radio-group *ngIf="prices" formControlName="price">
+          <div *ngFor="let price of prices" style="margin:6px; display:inline-block">
+            <mat-radio-button [value]="price">
+              ${{price}}
+            </mat-radio-button>
+          </div>
+        </mat-radio-group>
+        </div>
+        <textarea mat-textarea placeholder="Description" maxlength="50" style="width:275px;" formControlName="description"></textarea>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button type="button" (click)="resetChanges()"><mat-icon class="mat-24">clear</mat-icon>Clear</button>
+        <button mat-button type="button" (click)="completeTab('pricedescription', formCreateAd.controls['price'].value)"><mat-icon class="mat-24">check</mat-icon>Done</button>
+      </mat-card-actions>
+    </mat-card>
+    </mat-tab>
+    <mat-tab label="Submit">
+    <mat-card>
+      <mat-card-title-group>
+        <mat-card-subtitle>Information Preview</mat-card-subtitle>
+        <mat-card-title>{{ad.name}}</mat-card-title>
+      </mat-card-title-group>
+      <mat-card-content>
+        <img style="width:288px;" *ngIf="adImageSrc!=''" [src]="adImageSrc" alt="{{ad.name}}">
+        <br>
+        <label for="" *ngIf="ad.console !== ''">Console: {{consoles[ad.console]}}<br></label>
+        <label for="" *ngIf="ad.section !== ''">Section: {{sections[ad.section]}}<br></label>
+        <label for="" *ngIf="ad.price !== ''">Price: ${{ad.price}}<br></label>
+        <label for="" *ngIf="ad.description">Description: {{ad.description}}<br></label>
+        <label for="" *ngIf="ad.owner !== ''">Contact: {{ad.owner}}<br></label>
+        <label for="" *ngIf="ad.email !== ''">E.: {{ad.email}}<br></label>
+        <label for="" *ngIf="ad.telephone !== ''">Tel.: {{ad.telephone}}<br></label>
+        <label for="" *ngIf="ad.contactMethod !== ''">Prefered contact method: {{ad.contactMethod}}<br></label>
+        <label for="" *ngIf="ad.city !== ''">City: {{ad.city}}<br></label>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button type="button" (click)="resetChanges()"><mat-icon class="mat-24">clear</mat-icon>Clear</button>
+        <button mat-button type="submit" [disabled]="!formCreateAd.valid">Submit</button>
+      </mat-card-actions>
+    </mat-card>
+    </mat-tab>
+  </mat-tab-group>
+</form>
+<mat-card *ngIf="!validUserFlag">
+    <mat-card-title style="text-align: middle;">Please complete your account information before create new Ads!</mat-card-title>
+</mat-card>
