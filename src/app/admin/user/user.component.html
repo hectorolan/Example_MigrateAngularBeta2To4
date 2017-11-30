@@ -5,7 +5,7 @@
   </mat-card>
   <mat-card>
       <mat-card-actions>
-          <button *ngIf="authService.isPasswordUser()" type="button" mat-button (click)="changePasswordEmail()">Send Change Password Email</button>
+          <button *ngIf="userHasPassword" type="button" mat-button (click)="changePasswordEmail()">Send Change Password Email</button>
           <button type="button" mat-button (click)="deleteAccount()">Delete Account</button>
           <button type="button" mat-button>Terms and Conditions</button>
       </mat-card-actions>

@@ -21,6 +21,7 @@ export class UserComponent implements OnInit {
 
   user: User = new User();
   dialogRef: MatDialogRef<YesCancelDialogComponent>;
+  userHasPassword = false;
 
   constructor(
     private authService: AuthService,
@@ -32,6 +33,7 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.authService.user;
+    this.userHasPassword = this.authService.isPasswordUser();
   }
 
   saveSubmit(data: {[key: string]: any}) {

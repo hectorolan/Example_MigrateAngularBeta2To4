@@ -15,6 +15,9 @@ export class MainComponent implements OnInit, OnDestroy {
   @ViewChild('navpanel') navpanel: ElementRef;
   navMode = 'side';
   initOpened = true;
+  // Is UserLoggedIn? User name
+  isLoggedIn = false;
+  username = '';
 
   constructor(
     private authService: AuthService,
@@ -26,6 +29,8 @@ export class MainComponent implements OnInit, OnDestroy {
     }
 
   ngOnInit() {
+    this.username = this.authService.user.name != null && this.authService.user.name !== '' ? this.authService.user.name : 'Account';
+    this.isLoggedIn = this.authService.isLoggedIn;
     if (window.innerWidth <= 500) {
       this.togglenavService.showNavToggleBtn = true;
       this.initOpened = false;

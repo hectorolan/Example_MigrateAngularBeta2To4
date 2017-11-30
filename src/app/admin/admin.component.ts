@@ -14,6 +14,8 @@ export class AdminComponent implements OnInit, OnDestroy {
   @ViewChild('navpanel') navpanel: ElementRef;
   navMode = 'side';
   initOpened = true;
+  // Accounts Name
+  accountName = '';
 
   constructor(
     private authService: AuthService,
@@ -26,6 +28,7 @@ export class AdminComponent implements OnInit, OnDestroy {
    }
 
   ngOnInit() {
+    this.accountName = this.authService.user.name != null && this.authService.user.name !== '' ? this.authService.user.name : 'Account' ;
     if (window.innerWidth <= 500) {
       this.togglenavService.showNavToggleBtn = true;
       this.initOpened = false;
