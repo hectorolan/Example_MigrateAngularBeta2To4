@@ -4,7 +4,7 @@ import * as firebase from 'firebase';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyA7cHIY_mihlnv4xefUsQEGE6xoxuwyn7k',
-  authDomain: 'gcla.azurewebsites.net',
+  authDomain: 'gamesclasificados.firebaseapp.com',
   databaseURL: 'https://gamesclasificados.firebaseio.com',
   storageBucket: 'gamesclasificados.appspot.com',
   messagingSenderId: '292788060773'
