@@ -8,13 +8,11 @@ import { TogglenavService } from './services/togglenav.service';
 })
 export class AppComponent implements OnInit {
   title = 'GAMES Clasificados';
-  showNavToggleBtn = false;
-  constructor(private tooglenavService: TogglenavService) {
+  constructor(public tooglenavService: TogglenavService) {
       this.tooglenavService.toggle();
   }
 
   ngOnInit() {
-    this.showNavToggleBtn = this.tooglenavService.showNavToggleBtn;
     if (window.innerWidth <= 500) {
       this.tooglenavService.showNavToggleBtn = true;
     }

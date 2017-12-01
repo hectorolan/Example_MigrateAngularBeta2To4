@@ -1,11 +1,11 @@
 <div style="position:fixed; top:0px; backface-visibility: hidden; width: 100%">
   <mat-toolbar color="">
-    <button *ngIf="showNavToggleBtn" mat-icon-button (click)="toggleNav();">
+    <button *ngIf="tooglenavService.showNavToggleBtn" mat-icon-button (click)="toggleNav();">
       <i class="material-icons">menu</i>
     </button>
     <span routerLink="/games" routerLinkActive="active">{{title}}</span>
   </mat-toolbar>
 </div>
-<div id="main-page"style="position:fixed; top:64px;">
+<div id="main-page"style="position:fixed; top:56px;">
   <router-outlet></router-outlet>
 </div>
