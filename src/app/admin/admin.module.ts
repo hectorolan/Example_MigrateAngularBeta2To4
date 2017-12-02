@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { CreateAdComponent } from './createad/createad.component';
@@ -11,7 +10,6 @@ import { BaseModule } from '../shared/base/base.module';
 @NgModule({
   imports: [
     BaseModule,
-    CommonModule,
     AdminRoutingModule
   ],
   declarations: [
